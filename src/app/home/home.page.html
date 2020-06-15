@@ -1,20 +1,58 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
-</ion-content>
+<ion-split-pane contentId="map-content">
+  <ion-menu contentId="map-content">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>
+          Saved Addresses
+        </ion-title>
+      </ion-toolbar>
+    </ion-header>
+      <ion-content>
+        <ion-list>
+          <ion-item *ngFor="let address of addresses" button
+          (click) ="selectedAddress=address">
+          <ion-label>
+            <p>{{address.addressLine1}}</p>
+            <p *ngIf="address.addressLine2">{{address.addressLine2}}</p>
+            <p>{{address.city}}, {{address.state}}, {{address.zipCode}}</p>
+          </ion-label>
+        </ion-item>
+        </ion-list>
+      </ion-content>
+    </ion-menu>
+    <section class="ion-page" id="map-content">
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-menu-toggle>
+              <ion-button>
+                <ion-icon slot="icon-only" name="menu"></ion-icon>
+              </ion-button>
+            </ion-menu-toggle>
+          </ion-buttons>
+          <ion-title>Select Location</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+      <agm-map [latitude]="+selectedAddress.latitude"
+      [longitude]="+selectedAddress.longitude"
+      [zoom]="18"
+      [clickableIcons]="true"
+      [showDefaultInfoWindow]="false"
+      [usePanning]="true"
+      (mapClick)="onMapClick($event)">
+      <agm-marker *ngFor="let address of addresses"
+      [latitude]="+address.latitude" [longitude]="+address.longitude"
+      (markerClick)="selectedAddress=address">
+      <agm-info-window [isOpen]="selectedAddress===address" [maxWidth]=300>
+        <ion-label>
+          <p>{{address.addressLine1}}</p>
+          <p *ngIf="address.addressLine2">{{address.addressLine2}}</p>
+          <p>{{address.city}}, {{address.state}}, {{address.zipCode}}</p>
+        </ion-label>
+      </agm-info-window>
+    </agm-marker>
+    </agm-map>
+  </ion-content>
+    </section>
+</ion-split-pane>
