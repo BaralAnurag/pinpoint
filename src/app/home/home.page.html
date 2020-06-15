@@ -8,10 +8,10 @@
       </ion-toolbar>
     </ion-header>
       <ion-content>
-        List of adresses...
+        List of addresses..
       </ion-content>
     </ion-menu>
-    <ion-content id="map-content">
+    <section class="ion-page" id="map-content">
       <ion-header>
         <ion-toolbar>
           <ion-buttons slot="start">
@@ -24,6 +24,14 @@
           <ion-title>Select Location</ion-title>
         </ion-toolbar>
       </ion-header>
-      <p>we will insert maps here</p>
-    </ion-content>
+      <ion-content>
+      <agm-map [latitude]="+selectedAddress.latitude"
+      [longitude]="+selectedAddress.longitude"
+      [zoom]="18"
+      [clickableIcons]="true"
+      [showDefaultInfoWindow]="false"
+      [usePanning]="true">
+    </agm-map>
+  </ion-content>
+    </section>
 </ion-split-pane>
