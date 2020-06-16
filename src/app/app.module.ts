@@ -9,6 +9,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AgmCoreModule, MapsAPILoader } from '@agm/core';
+import { IonicStorageModule } from '@ionic/storage';
 
 @NgModule({
   declarations: [AppComponent],
@@ -16,7 +17,11 @@ import { AgmCoreModule, MapsAPILoader } from '@agm/core';
   imports: [ AgmCoreModule.forRoot({
      apiKey: 'AIzaSyA6u6-kTIPC4nyFIy74LiqN4hUWW5VDbw0'
   })
-    , BrowserModule, IonicModule.forRoot(), AppRoutingModule],
+    ,
+     IonicStorageModule.forRoot({
+       name: 'pinpoint'
+     }),
+     BrowserModule, IonicModule.forRoot(), AppRoutingModule],
   providers: [
     StatusBar,
     SplashScreen,
