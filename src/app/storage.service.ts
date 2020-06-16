@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import uuid from 'uuid/';
+import { v1 as uuidv1} from 'uuid';
 import { Address } from './address';
 import { Storage } from '@ionic/storage';
 
@@ -12,7 +12,7 @@ export class StorageService {
 
   async saveAddress(address: Address): Promise<Address> {
     if (!address.addressId) {
-      address.addressId = uuid();
+      address.addressId = uuidv1();
     }
     await this.storage.set(address.addressId, address);
     return address;
