@@ -127,6 +127,19 @@ function startup() {
   buildTrayMenu();
 }
 
+function buildTrayMenu() {
+  const trayIcon = process.platform === 'win32' ? 'icon.ico' : 'tray-icon.png';
+  tray = new Tray(path.join(__dirname, 'images', trayIcon));
+  tray.on('double-click', () => mainWindow.show());
+  tray.setPressedImage(path.join(__dirname, 'images','tray-icon-pressed.png'));
+  tray.setToolTip(app.getName());
+  tray.setContextMenu(Menu.buildFromTemplate([
+    {role: 'about'},
+    {type: 'separator'},
+    {role: 'quit'}
+  ]));
+}
+
 // Quit when all windows are closed.
 app.on('window-all-closed', function () {
   // On OS X it is common for applications and their menu bar
