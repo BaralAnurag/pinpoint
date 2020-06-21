@@ -1,6 +1,6 @@
 {
-  "appId": "io.ionic.starter",
-  "appName": "pinpoint",
+  "appId": "com.walkingriver.pinpoint",
+  "appName": "pinpont",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",
